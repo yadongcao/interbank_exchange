@@ -9,7 +9,7 @@
 - 5、机构可以通过该系统投资该理财产品获得回报。
 
 ### 流程图
-![alt tag](.\流程图.jpg)
+![avatar](.\流程图.jpg)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
