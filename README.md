@@ -1,3 +1,17 @@
+## 银行同业资产交易所
+
+### ID：interbank_exchange
+
+- 1、银行作为一个主体可以上传资产。
+- 2、银行间可以就该资产做交易。
+- 3、交易流水记录在系统上。
+- 4、不同类型资产可以协作，打包成一个资产组合。然后变成理财产品。
+- 5、机构可以通过该系统投资该理财产品获得回报。
+
+### 流程图
+![alt tag](.\流程图.jpg)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
