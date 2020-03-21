@@ -9,7 +9,7 @@
 - 5、机构可以通过该系统投资该理财产品获得回报。
 
 ### 流程图
-![alt tag](https://github.com/yadongcao/interbank_exchange/blob/master/%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
+![alt tag](./流程图.jpg)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
