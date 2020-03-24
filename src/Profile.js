@@ -17,13 +17,60 @@ export default class Profile extends Component {
   	  	avatarUrl() {
   	  	  return avatarFallbackImage;
   	  	},
-  	  },
+      },
+      nesStatus: "",
+      status:""
   	};
+  }
+  
+  saveNewStatus(statusText) {
+    const { userSession } = this.props
+
+    let status = {
+      text: statusText.trim(),
+      created_at: Date.now()
+    }
+
+    const options = {encrypt: false}
+    userSession.putFile('status.json', JSON.stringify(status), options)
+      .then(()=>{
+        this.setState({
+          newStatus: status.text
+        })
+      })
+  }
+
+  fetchData() {
+    const { userSession } = this.props
+    const options = { decrypt: false}
+    userSession.getFile('status.json', options)
+      .then((file) => {
+        var status = JSON.parse(file || '[]')
+        console.log(status)
+        this.setState({
+          status: status
+        })
+      })
+      .finally(()=> {
+        console.log("read over")
+      })
+  }
+
+  handleNewStatusChange(event) {
+    this.setState({newStatus: event.target.value})
+  }
+
+  handleNewStatusSubmit(event) {
+    this.saveNewStatus(this.state.newStatus)
+    this.setState({
+      newStatus: ""
+    })
   }
 
   render() {
     const { handleSignOut, userSession } = this.props;
     const { person } = this.state;
+    console.log(person)
     return (
       !userSession.isSignInPending() ?
       <div className="panel-welcome" id="section-2">
@@ -40,8 +87,24 @@ export default class Profile extends Component {
             Logout
           </button>
         </p>
+        <br/>
+        <br></br>
+        <textarea className="input-status"
+                  value={this.state.newStatus}
+                  onChange={e=> this.handleNewStatusChange(e)}
+                  placeholder="输入状态"></textarea>
+                  <br></br>
+        <button className="btn btn-primary btn-lg"
+                onClick={e=> this.handleNewStatusSubmit(e)}>
+                  提交
+        </button>
+    <p> status is: {this.state.status.text}</p>
       </div> : null
     );
+  }
+
+  componentDidMount(){
+    this.fetchData()
   }
 
   componentWillMount() {
