@@ -9,11 +9,13 @@
 - 5、机构可以通过该系统投资该理财产品获得回报。
 
 ### 流程图
-![alt tag](./流程图.jpg)
+![alt tag](./files/流程图.jpg)
 
 网址 [https://interbankexchange.netlify.com/](https://interbankexchange.netlify.com/)
 
 
+### 去中心化产品添加数据交互模块设计图
+![alt tag](./files/存储.jpg)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
