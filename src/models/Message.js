@@ -1,18 +1,19 @@
-import { Model } from 'radiks';
+import { Model } from 'radiks-gavin-test';
 
 export default class Message extends Model {
-    static className = 'Message';
+  static className = 'Message';
 
-    static schema = {
-        from: String,
-        content: String,
-        flag: {
-            type: Boolean,
-            decrypted: true
-        }
+  static schema = {
+    from: String,
+    content: String,
+    groupname: String,
+    userGroupId: {
+      type: String,
+      decrypted: true,
     }
+  }
 
-    static defaults = {
-        content: "Welcome to message board"
-    }
+  static defaults = {
+    userGroupId: ""
+  }
 }

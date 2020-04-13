@@ -17,45 +17,42 @@ export default class Profile extends Component {
   	  	avatarUrl() {
   	  	  return avatarFallbackImage;
   	  	},
-      },
-      nesStatus: "",
+  	  },
+      newStatus:"",
       status:""
   	};
   }
-  
   saveNewStatus(statusText) {
-    const { userSession } = this.props
+     const { userSession } = this.props
 
-    let status = {
-      text: statusText.trim(),
-      created_at: Date.now()
-    }
+     let status = {
+       text: statusText.trim(),
+       created_at: Date.now()
+     }
 
-    const options = {encrypt: false}
-    userSession.putFile('status.json', JSON.stringify(status), options)
-      .then(()=>{
-        this.setState({
-          newStatus: status.text
-        })
-      })
+     const options = { encrypt: false }
+     userSession.putFile('status.json', JSON.stringify(status), options)
+       .then(() => {
+         this.setState({
+           newStatus: status.text
+         })
+       })
   }
-
   fetchData() {
-    const { userSession } = this.props
-    const options = { decrypt: false}
-    userSession.getFile('status.json', options)
-      .then((file) => {
-        var status = JSON.parse(file || '[]')
-        console.log(status)
-        this.setState({
-          status: status
-        })
-      })
-      .finally(()=> {
-        console.log("read over")
-      })
+   const { userSession } = this.props
+   const options = { decrypt: false }
+   userSession.getFile('status.json', options)
+     .then((file) => {
+       var status = JSON.parse(file || '[]')
+       console.log(status)
+       this.setState({
+         status:status
+       })
+     })
+     .finally(() => {
+       console.log("read over")
+     })
   }
-
   handleNewStatusChange(event) {
     this.setState({newStatus: event.target.value})
   }
@@ -66,7 +63,6 @@ export default class Profile extends Component {
       newStatus: ""
     })
   }
-
   render() {
     const { handleSignOut, userSession } = this.props;
     const { person } = this.state;
@@ -77,7 +73,7 @@ export default class Profile extends Component {
         <div className="avatar-section">
           <img src={ person.avatarUrl() ? person.avatarUrl() : avatarFallbackImage } className="img-rounded avatar" id="avatar-image" alt=""/>
         </div>
-        <h1>Hello, <span id="heading-name">{ person.name() ? person.name() : 'Nameless Person' }</span>!</h1>
+        <p>Hello, <span id="heading-name">{ person.name() ? person.name() : 'Nameless Person' }</span>!</p>
         <p className="lead">
           <button
             className="btn btn-primary btn-lg"
@@ -88,25 +84,28 @@ export default class Profile extends Component {
           </button>
         </p>
         <br/>
-        <br></br>
+        <br/>
         <textarea className="input-status"
-                  value={this.state.newStatus}
-                  onChange={e=> this.handleNewStatusChange(e)}
-                  placeholder="输入状态"></textarea>
-                  <br></br>
-        <button className="btn btn-primary btn-lg"
-                onClick={e=> this.handleNewStatusSubmit(e)}>
-                  提交
+                 value={this.state.newStatus}
+                 onChange={e => this.handleNewStatusChange(e)}
+                 placeholder="输入状态"
+               />
+        <br/>
+
+        <button
+                 className="btn btn-primary btn-lg"
+                 onClick={e => this.handleNewStatusSubmit(e)}
+                >
+                提交
         </button>
-    <p> status is: {this.state.status.text}</p>
+        <p>  status is: {this.state.status.text}</p>
+
       </div> : null
     );
   }
-
-  componentDidMount(){
+  componentDidMount() {
     this.fetchData()
   }
-
   componentWillMount() {
     const { userSession } = this.props;
     this.setState({
